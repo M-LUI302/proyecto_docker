@@ -1,0 +1,53 @@
+{% extends 'main.html'%}
+
+{% block cabecera %}
+        <title>Control de asistencia</title>
+{% endblock %}
+    
+{% block cuerpo %}
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-2">
+                {% include 'plantillas/navbar.html'%}
+            </div>
+            <div id="contenedor" class="col-3">
+                {% include 'plantillas/formulario.html'%}
+            </div>
+            <div class="col-6" >
+                <h5 class="text-center">Control de asitencia<h5>
+                    <table class="table table-responsive-sm table-striped">
+                        <thead class="thead-inverse">
+                            <tr class="text-center">
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Materia</th>
+                                <th>Presente</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            {%for alumno in lista_alumnos%}
+                              <tr>
+                                <td>{{alumno.id}}</td>
+                                <td>{{alumno.nombre}}</td>
+                                <td>{{alumno.apellidos}}</td>
+                                <td>{{alumno.materia}}</td>
+                                <td>{{alumno.presente}}</td>
+                                <td> <a href="{{url_for('eliminar', id = alumno.id)}}">Eliminar</a>
+                                    <button class="btn btn-info mt-4 ues-btn" id="formulario_actualizar" data-bs-toggle="modal" data-bs-target="#actualizar-Registro">Actualizar</button><!--<a href="ues-publicar-modal/">Actualizar</a>-->
+                                  </td>
+
+                              </tr>
+                              {%include 'plantillas/formulario_act.html'%}
+                              {%include 'plantillas/publicar-modal.html'%}
+                            {%endfor%}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+
+
+    
+    {% endblock %}
